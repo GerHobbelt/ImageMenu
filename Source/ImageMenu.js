@@ -70,7 +70,7 @@ var ImageMenu = new Class({
 				self.options.open = (self.options.open == i) ? null : i;
 				var event = (self.options.open == i) ? 'Close' : 'Open';
 				self.fireEvent('click' + event, [this.href, i])
-					.fireEvent('click', [this.href, i]);
+					.fireEvent('click', [this.href, i, event]);
 			});
 			
 		});
