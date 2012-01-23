@@ -24,6 +24,7 @@ var ImageMenu = new Class({
 		onClickOpen: function(){},
 		onClickClose: function(){},*/
 		openWidth: 200,
+		closedWidth: 90,
 		openOnClick: true,
 		transition: Fx.Transitions.Quad.easeOut,
 		duration: 400,
@@ -36,8 +37,8 @@ var ImageMenu = new Class({
 		this.setOptions(options);
 
 		this.widths = {
-			closed: this.elements[0].getStyle('width').toInt(),
-			openSelected: this.options.openWidth
+			closed: this.options.closedWidth.toInt() || this.elements[0].getStyle('width').toInt(),
+			openSelected: this.options.openWidth.toInt()
 		};
 		this.widths.openOthers = Math.round(((this.widths.closed * this.elements.length) - (this.widths.openSelected + this.options.border)) / (this.elements.length - 1));
 
@@ -82,7 +83,10 @@ var ImageMenu = new Class({
 
 			this.reset(open);
 		}
-
+		else {
+			// always set the widths of all the <li> elements; none active, so all at same width:
+			this.reset(null);
+		}
 	},
 	
 	reset: function(num){
@@ -93,14 +97,14 @@ var ImageMenu = new Class({
 
 		if (isNumber){
 			width = this.widths.openOthers;
-			if ((num + 1) == this.elements.length) width += this.options.border;
+			//if ((num + 1) == this.elements.length) width += this.options.border;
 		} else {
 			width = this.widths.closed;
 		}
 
 		this.elements.each(function(el, i){
 			var w = width;
-			if (i == (this.elements.length - 1)) w = width + 5;
+			if (i == (this.elements.length - 1)) w = width + this.options.border;
 			obj[i] = {width: w};
 		}, this);
 

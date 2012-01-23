@@ -17,7 +17,16 @@
 			openWidth: 310,
 			border: 2,
 			onClickOpen: function(e, i){
-				alert(e);
+				console.log('onClickOpen: ', e, i, arguments);
+				alert('onClickOpen: ' + e);
+			},
+			onClickClose: function(e, i){
+				console.log('onClickClose: ', e, i, arguments);
+				alert('onClickClose: ' + e);
+			},
+			onClick: function(e, i, mode){
+				console.log('onClick: ', e, i, arguments);
+				alert('onClick: ' + e);
 			}
 		});
 
