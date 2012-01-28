@@ -76,17 +76,7 @@ var ImageMenu = new Class({
 			
 		});
 
-
-		if (this.options.open != null){
-			var isNumber = typeOf(this.options.open) == 'number',
-				open = isNumber ? this.options.open : this.elements.indexOf(document.id(this.options.open));
-
-			this.reset(open);
-		}
-		else {
-			// always set the widths of all the <li> elements; none active, so all at same width:
-			this.reset(null);
-		}
+		this.reset(this.options.open);
 	},
 	
 	reset: function(num){
@@ -94,6 +84,11 @@ var ImageMenu = new Class({
 		var isNumber = typeOf(num) == 'number',
 			obj = {},
 			width;
+
+		if (num != null && !isNumber){
+			num = this.elements.indexOf(document.id(num));
+			isNumber = (typeOf(num) == 'number');
+		}
 
 		if (isNumber){
 			width = this.widths.openOthers;
